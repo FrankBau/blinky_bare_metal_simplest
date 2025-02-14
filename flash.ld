@@ -6,23 +6,27 @@ MEMORY
     RAM(rw)   : ORIGIN = 0x20000000, LENGTH =  64k
 }
 
-PROVIDE( _estack = ORIGIN(RAM)+LENGTH(RAM) );
+PROVIDE( _estack = ORIGIN(RAM)+LENGTH(RAM) );   
     
 SECTIONS {
-    .text : {
-    	*(.isr_vector_table)
-    	*(.text*) 
+    .isr_vector :   # must be at the beginning of the flash
+    {
+    	KEEP(*(.isr_vector))    # keep interrupt vector table
     } > FLASH
 
-    .rodata : { 
+    .text : {       # machine code goes here
+    	*(.text*)
+    } > FLASH
+
+    .rodata : {     # read only (const) global/static variables
         *(.rodata*) 
     } > FLASH
     
-    .data : {
+    .data : {       # initialized global/static variables
         *(.bss*) 
     } > RAM AT > FLASH
 
-    .bss : {
+    .bss : {        # uninitialized global/static variables
         *(.bss*)
     } > RAM    
 }

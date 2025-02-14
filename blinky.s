@@ -8,10 +8,10 @@
 .thumb                          // we generate thumb code (not arm)
 
 
-.section .isr_vector_table, "a", %progbits  // interrupt vector table section
-.global  isr_vectors            // declare the symbol 'isr_vectors' as globally visible
-.type    isr_vectors, %object   // declare 'isr_vectors' as an object (data) symbol
-isr_vectors:                    // vector table for the interrupt service routines (ISRs)
+.section .isr_vector, "a", %progbits  // interrupt vector table section
+.global  isr_vector             // declare the symbol 'isr_vector' as globally visible
+.type    isr_vector, %object    // declare 'isr_vector' as an object (data) symbol
+isr_vector:                     // vector table for the interrupt service routines (ISRs)
     .word   _estack             // initial value of the stack pointer (defined in the linker script)
     .word   _start              // reset vector (start of the program)
 
