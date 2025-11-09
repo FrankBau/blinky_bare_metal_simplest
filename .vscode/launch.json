@@ -5,19 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "cwd": "${workspaceRoot}",
-            "executable": "./blinky.elf",
-            "showDevDebugOutput": "parsed",
-            "name": "Debug STM32",
+            "type": "stlinkgdbtarget",
             "request": "launch",
-            "type": "cortex-debug",
-            "servertype": "openocd",
+            "name": "Makefile: STM32 Launch ST-Link GDB Server",
+            "origin": "snippet",
+            "cwd": "${workspaceFolder}",
             "preLaunchTask": "make",
-            "device": "stm32l432",
-            "svdFile": "STM32L4x2.svd",
-            "runToEntryPoint": "_start",
-            "configFiles": [
-                "openocd.cfg"
+            "runEntry": "main",
+            "deviceName": "STM32L432KCU3",
+            "deviceCore": "Cortex-M4",
+            "imagesAndSymbols": [
+                {
+                    "imageFileName": "${workspaceFolder}/blinky.elf"
+                }
             ]
         }
     ]
